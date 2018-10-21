@@ -82,7 +82,7 @@ function hitung(){
 function load() {
 $.ajax({
     // url : 'http://192.168.20.7/rci/index.php/akademik/index_get',
-    url : 'http://restciapp.000webhostapp.com/index.php/pulsa/index_get',
+    url : 'http://api.stpd.cf/index.php/pulsa/index_get',
     type: 'GET',
     success: function (data) {
         var list_holder=document.getElementById('list_data');
@@ -100,7 +100,7 @@ if (konfirmasi) {
     var data_hapus = {"no_trans": no_trans};
     $.ajax({
         type: 'DELETE',
-        url:'http://restciapp.000webhostapp.com/index.php/pulsa/index_delete',
+        url:'http://api.stpd.cf/index.php/pulsa/index_delete',
         data: data_hapus
     });
     alert("No Transaksi "+no_trans+" telah terhapus");
@@ -234,7 +234,7 @@ if (kembalian >= 0) {
 var data_input = {"no_trans": no_trans, "tgl": tgl, "no_hp": no_hp, "provider": provider, "paket":paket, "harga":harga, "bayar":bayar, "status":status};
 $.ajax({
 type: 'POST',
-url:'http://restciapp.000webhostapp.com/index.php/pulsa/index_post',
+url:'http://api.stpd.cf/index.php/pulsa/index_post',
 data: data_input
 });
 alert("Data telah tersimpan");
@@ -272,7 +272,7 @@ if (kembalian >= 0) {
 var data_input = {"no_trans": no_trans, "tgl": tgl, "no_hp": no_hp, "provider": provider, "paket":paket, "harga":harga, "bayar":bayar, "status":status};
 $.ajax({
 type: 'PUT',
-url:'http://restciapp.000webhostapp.com/index.php/pulsa/index_put',
+url:'http://api.stpd.cf/index.php/pulsa/index_put',
 data: data_input
 });
 window.location.reload();
