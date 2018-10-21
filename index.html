@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, mino_transum-scale=1, user-scalable=no, mino_transal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Your app title -->
+    <title>Pulsa</title>
+    <!-- Path to Framework7 Library CSS, Material Theme -->
+    <link rel="stylesheet" href="css/framework7.material.min.css">
+    <!-- Path to Framework7 color related styles, Material Theme -->
+    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+    <!-- Path to your custom app styles-->
+</head>
+<body onload="load();">
+     <!-- Views -->
+    <div class="views">
+      <!-- Your main view, should have "view-main" class -->
+      <div class="view view-main">
+        <!-- Pages container, because we use fixed navbar and toolbar, it has additional appropriate classes-->
+        <div class="pages">
+            <div class="page navbar-fixed">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="center">Data Penjualan Pulsa</div>
+                    </div>
+                </div>
+                <div class="page-content hide-bars-on-scroll pull-to-refresh-content"  data-ptr-distance="55">
+                    <!-- Default pull to refresh layer-->
+                    <div class="pull-to-refresh-layer">
+                      <div class="preloader"></div>
+                      <div class="pull-to-refresh-arrow"></div>
+                    </div>
+                    <div class="data-table card" id="show_edit_part">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>No Transaksi</th>
+                                            <th>Tgl Transaksi</th>
+                                            <th>No Handphone</th>
+                                            <th>Provider</th>
+                                            <th>Paket</th>
+                                            <th>Harga</th>
+                                            <th>Bayar</th>
+                                            <th>Status</th>
+                                            <th>Action list</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="list_data">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                </div>
+
+            </div>
+        </div>
+        <a href="#" class="floating-button color-blue open-login-screen">
+                    <i class="fa fa-plus"></i>
+                </a>
+          <div class="login-screen">
+            <div class="view">
+              <div class="page">
+                <div class="page-content login-screen-content">
+                  <div class="login-screen-title" id="title"><span>Input Transaksi</span></div>
+                  <form>
+                    <div class="list-block">
+                        <div class="page-content hide-bars-on-scroll">
+                            <div class="list-block-label">
+                              <p><a href="#" class="button button-round close-login-screen"><i class="fa fa-arrow-left"></i> back</a></p>
+                            </div>
+                            <form id="mhs" class="list-block">
+                                <ul>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="fa fa-calendar fa-1x"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title label">Tanggal Transaksi</div>
+                                                <div class="item-input">
+                                                    <input id="tgl" type="date">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="fa fa-list-ol fa-1x"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title label">No Transaksi</div>
+                                                <div class="item-input">
+                                                    <input id="no_trans" type="text" placeholder="P-001">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="fa fa-phone fa-1x"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title label">No Handphone</div>
+                                                <div class="item-input">
+                                                    <input id="no_hp" type="text" placeholder="Masukan No Handphone">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="fa fa-server fa-1x"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title label">Provider</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-10"></div>
+                                            <div class="col-90">
+                                                <label class="label-radio item-content">
+                                                    <input id="indosat" type="radio" name="provider" onclick="changePaket();">
+                                                    <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Indosat</div>      
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-10"></div>
+                                            <div class="col-90">
+                                                <label class="label-radio item-content">
+                                                    <input id="telkomsel" type="radio" name="provider" onclick="changePaket();">
+                                                    <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Telkomsel</div>      
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-10"></div>
+                                            <div class="col-90">
+                                                <label class="label-radio item-content">
+                                                    <input id="Smartfreen" type="radio" name="provider" onclick="changePaket();">
+                                                    <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Smartfreen</div>      
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-10"></div>
+                                            <div class="col-90">
+                                                <label class="label-radio item-content">
+                                                    <input id="xl" type="radio" name="provider" onclick="changePaket();">
+                                                    <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-title">XL</div>      
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-10"></div>
+                                            <div class="col-90">
+                                                <label class="label-radio item-content">
+                                                    <input id="three" type="radio" name="provider" onclick="changePaket();">
+                                                    <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Three</div>      
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-10"></div>
+                                            <div class="col-90">
+                                                <label class="label-radio item-content">
+                                                    <input id="axis" type="radio" name="provider" onclick="changePaket();">
+                                                    <div class="item-media"><i class="icon icon-form-radio"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Axis</div>      
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="item-content">
+                                        <div class="item-media"><i class="fa fa-list fa-1x"></i></div>
+                                          <div class="item-inner">
+                                          <div class="item-title label">Paket</div>
+                                            <select id="paket" onclick="getPaket();">
+                                              <option>Pilih Paket</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="fa fa-money-bill-alt fa-1x"></i></div>
+                                            <div class="item-inner">
+                                              <div class="item-title label">Harga</div>
+                                                <div class="item-input">
+                                                    <input id="harga" type="text" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="fa fa-credit-card fa-1x"></i></div>
+                                            <div class="item-inner">
+                                              <div class="item-title label">Bayar</div>
+                                                <div class="item-input">
+                                                    <input id="bayar" type="text" placeholder="Masukkan Jumlah Yang Dibayar ">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <div class="content-block">
+                                        <p><a href="#" class="button button-round button-fill color-green" onclick="hitung();">Hitung</a></p>
+                                    </div>
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="fa fa-money-bill-alt fa-1x"></i></div>
+                                            <div class="item-inner">
+                                              <div class="item-title label">Kembalian</div>
+                                                <div class="item-input">
+                                                    <input id="kembalian" type="text" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </form>
+                            <div class="content-block" id="simpan">
+                               <p><a href="#" class="button button-round button-fill color-blue"  onclick="tambah_data();">Simpan</a></p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="list-block">
+                      <div class="list-block-label">
+                        <p><a href="#" class="button button-round close-login-screen"><i class="fa fa-arrow-left"></i> back</a></p>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+        </div>
+      </div>
+    </div>
+
+    </div>
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/fontawesome-all.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+</body>
+</html>
